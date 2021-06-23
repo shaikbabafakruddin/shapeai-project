@@ -1,0 +1,129 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Project on weather information for shapeai",
+      "provenance": [],
+      "collapsed_sections": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "6JzmNlSnp6qA"
+      },
+      "source": [
+        "                                        SHAPEAI  PROJECT"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "HwVDctvtrcDQ"
+      },
+      "source": [
+        "Project about fecthing weather information with a 3rd  party api using and also recording this info in a text file."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "dMwG8R4dsS8a"
+      },
+      "source": [
+        "first write a program on weather parameter"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cilUVyLKi4jF",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "d3a027e1-16ee-4ccf-9f1e-7474de1f08dc"
+      },
+      "source": [
+        "import requests\n",
+        "#import os\n",
+        "from datetime import datetime\n",
+        "\n",
+        "api_key = '020e751239dc9105c56af5507b668801'\n",
+        "location = input(\"Enter the city name: \")\n",
+        "\n",
+        "complete_api_link = \"https://api.openweathermap.org/data/2.5/weather?q=\"+location+\"&appid=\"+api_key\n",
+        "api_link = requests.get(complete_api_link)\n",
+        "api_data = api_link.json()\n",
+        "\n",
+        "#create variables to store and display data\n",
+        "temp_city = ((api_data['main']['temp']) - 273.15)\n",
+        "weather_desc = api_data['weather'][0]['description']\n",
+        "hmdt = api_data['main']['humidity']\n",
+        "wind_spd = api_data['wind']['speed']\n",
+        "date_time = datetime.now().strftime(\"%d %b %Y | %I:%M:%S %p\")\n",
+        "\n",
+        "print (\"-------------------------------------------------------------\")\n",
+        "print (\"Weather Stats for - {}  || {}\".format(location.upper(), date_time))\n",
+        "print (\"-------------------------------------------------------------\")\n",
+        "\n",
+        "print (\"Current temperature is: {:.2f} deg C\".format(temp_city))\n",
+        "print (\"Current weather desc  :\",weather_desc)\n",
+        "print (\"Current Humidity      :\",hmdt, '%')\n",
+        "print (\"Current wind speed    :\",wind_spd ,'kmph')"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Enter the city name: Anantapuram\n",
+            "-------------------------------------------------------------\n",
+            "Weather Stats for - ANANTAPURAM  || 23 Jun 2021 | 07:20:56 AM\n",
+            "-------------------------------------------------------------\n",
+            "Current temperature is: 36.76 deg C\n",
+            "Current weather desc  : light rain\n",
+            "Current Humidity      : 29 %\n",
+            "Current wind speed    : 3.52 kmph\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "D3GlRil8s5hv"
+      },
+      "source": [
+        "Now,run the program what we prepare "
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "JYPvzRQSuIdm"
+      },
+      "source": [
+        "Then the program ask input just it look like{ Enter the City name:}"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8DyZE3M-u7pM"
+      },
+      "source": [
+        "After that program show weather details about City."
+      ]
+    }
+  ]
+}
